@@ -52,3 +52,5 @@ Mkfile.old
 dkms.conf
 *.cbp
 *.layout
+*.json
+*.depend
