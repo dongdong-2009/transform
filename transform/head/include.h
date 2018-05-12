@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <float.h>
 #include <math.h>
+#include "public.h"
 #include "origin.h"
-#include "main.h"
 #include "O_B.h"
 
 
-#endif 
+#endif

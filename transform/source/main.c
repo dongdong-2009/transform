@@ -1,8 +1,6 @@
 #include "include.h"
 
 
-void copy_Point(Point *a,Point *b);
-
 int main()
 {
     int i=0;
@@ -24,8 +22,4 @@ int main()
 }
 
 
-void copy_Point(Point *a,Point *b)
-{
-    (*a).x=(*b).x;
-    (*a).y=(*b).y;
-}
+
