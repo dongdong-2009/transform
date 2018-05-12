@@ -54,3 +54,4 @@ dkms.conf
 *.layout
 *.json
 *.depend
+*.asv

@@ -11,19 +11,26 @@ Point point[60][80];
 
 Point OB_rivise[ROW][COL];   //桶形校正表
 Point BO_rivise[60][80];     //桶形反校正表
-// Point add_rivise[]=
-// {
-
-// }
+Point add_rivise[2357];
 
 
-void tran_O_B(char img_origin[][80],char img_bucket[][COL])
+int tran_O_B(char img_origin[][80],char img_bucket[][COL])
 {
     int i=0;
     int j=0;
     int count=0;
+    int bad=0;
     double m,n;
     int n1,m1;
+    char filename[]="E:\\github\\transform\\transform\\data\\add_rivise.txt";
+
+    FILE *fp=fopen(filename,"r");
+
+    if(!fp)
+    {
+        printf("Can't open file\n");
+        return 0;
+    }
 
     for(i=0;i<60;i++)
     {
@@ -32,15 +39,55 @@ void tran_O_B(char img_origin[][80],char img_bucket[][COL])
             img_bucket[point[i][j].x][point[i][j].y]=img_origin[i][j]-'0';
         }
     }
+
+    for(i=0;i<2357;i++)
+    {
+        fscanf(fp,"%d",&add_rivise[i].x);
+        fscanf(fp,"%d",&add_rivise[i].y);
+    }
+    fclose(fp);
+    for(i=0;i<2357;i++)
+    {
+        add_rivise[i].x+=min[0];
+        add_rivise[i].y+=min[1];
+    }
+    // for(i=0;i<2357;i++)
+    // {
+    //     printf("%3d",add_rivise[i].x);
+    //     printf("%3d ",add_rivise[i].y);
+    // }
     count=0;
     for(i=0;i<ROW;i++)
+    {
         for(j=0;j<COL;j++)
+        {
             if(2==img_bucket[i][j])
             {
-                printf("%4d,",i);
+//                if(i==6&&j==11)
+//                {
+//                    i=6;
+//                }
+                if(add_rivise[count].x<0) add_rivise[count].x=0;
+                if(add_rivise[count].x>59) add_rivise[count].x=59;
+                if(add_rivise[count].y<0) add_rivise[count].y=0;
+                if(add_rivise[count].x>79) add_rivise[count].x=79;
+                copy_Point(&OB_rivise[i][j],&add_rivise[count]);
+                img_bucket[i][j]=img_origin[OB_rivise[i][j].x][OB_rivise[i][j].y]-'0';
                 count++;
-                if(0==count%10) printf("\n");
             }
+        }
+    }
+
+
+    // count=0;
+    // for(i=0;i<ROW;i++)
+    //     for(j=0;j<COL;j++)
+    //         if(2==img_bucket[i][j])
+    //         {
+    //             printf("%4d,",i);
+    //             count++;
+    //             if(0==count%10) printf("\n");
+    //         }
 //    for(i=0;i<ROW;i++)
 //    {
 //        for(j=0;j<COL;j++)
@@ -50,13 +97,13 @@ void tran_O_B(char img_origin[][80],char img_bucket[][COL])
 //                printf("%4d,",i);
 //                count++;
 //                if(0==count%10) printf("\n");
-////                n=i-30;
-////                m=j-40;
-////                n1=30+round(n*(1-(k1-0.00001)*n*n-(k2-0.00007)*m*m))+min[0];
-////                m1=40+round(m*(1-(k1-0.00001)*n*n-(k2-0.00007)*m*m))+min[1];
-////                if(n1<0 || n1>=60 || m1<0 || m1>=80) img_bucket[i][j]=0;
-////                else
-////                    img_bucket[i][j]=img_origin[n1][m1]-'0';
+// //                n=i-30;
+// //                m=j-40;
+// //                n1=30+round(n*(1-(k1-0.00001)*n*n-(k2-0.00007)*m*m))+min[0];
+// //                m1=40+round(m*(1-(k1-0.00001)*n*n-(k2-0.00007)*m*m))+min[1];
+// //                if(n1<0 || n1>=60 || m1<0 || m1>=80) img_bucket[i][j]=0;
+// //                else
+// //                    img_bucket[i][j]=img_origin[n1][m1]-'0';
 //            }
 //        }
 //    }
@@ -70,8 +117,8 @@ void tran_O_B(char img_origin[][80],char img_bucket[][COL])
 //                count++;
 //                if(0==count%10) printf("\n");
 //            }
-
-
+    //printf("\n\n\n\n%d\n\n\n\n",bad);
+    return 1;
 }
 
 
@@ -100,7 +147,12 @@ void show_B()
     {
         for(j=0;j<COL;j++)
         {
-            if(img_bucket[i][j]==0 || img_bucket[i][j]==2)
+            // if(-48==img_bucket[i][j])
+            // {
+            //     max[0]=i;
+            //     max[1]=j;
+            // }
+            if(img_bucket[i][j]==0)
             {
                 printf(" ");
             }
@@ -154,7 +206,6 @@ void add_Max()
                if(point[i][j].y>max[1]) max[1]=point[i][j].y;
                if(point[i][j].x<min[0]) min[0]=point[i][j].x;
                if(point[i][j].y<min[1]) min[1]=point[i][j].y;
-               //printf("%d %d %d %d\n",i,j,point[i][j].x,point[i][j].y);
            }
         }
     }

@@ -17,8 +17,13 @@ int read_flie(char* filePath,char img_origin[][80])
     {
         for(j=0;j<80;j++)
         {
+//            if(1==i&&j==4)
+//            {
+//                i=1;
+//            }
             fscanf(fp,"%c",&c);
-            if(c=='\n') fscanf(fp,"%c",&c);
+            if(c=='\n')
+                fscanf(fp,"%c",&c);
             img_origin[i][j]=c;
         }
     }
