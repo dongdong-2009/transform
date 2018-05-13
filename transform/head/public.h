@@ -6,11 +6,11 @@
 
 typedef struct Point
 {
-    int x;
-    int y;
+    char x;
+    char y;
 }Point;
 
 
 extern void copy_Point(Point *a,Point *b);
 
-#endif 
+#endif

@@ -9,11 +9,9 @@ int main()
     add_Max();                          //将坐标点加上相应的位移量
 
     init_B(img_bucket);                 //初始化接受矩阵
-    if(img_origin[1][4]==49)
-    {
-        1+2;
-    }
+
     tran_O_B(img_origin,img_bucket);    //完成矩阵的转化
+
     show_B();
 
     printf("\n%d %d %d %d",min[0],max[0],min[1],max[1]);

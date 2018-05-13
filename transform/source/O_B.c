@@ -20,7 +20,7 @@ int tran_O_B(char img_origin[][80],char img_bucket[][COL])
     int j=0;
     int count=0;
     int bad=0;
-    double m,n;
+    double m=0,n;
     int n1,m1;
     char filename[]="E:\\github\\transform\\transform\\data\\add_rivise.txt";
 
@@ -31,11 +31,20 @@ int tran_O_B(char img_origin[][80],char img_bucket[][COL])
         printf("Can't open file\n");
         return 0;
     }
-
+//    if(img_origin[1][4]==49)
+//    {
+//        1+2;
+//    }
     for(i=0;i<60;i++)
     {
         for(j=0;j<80;j++)
         {
+            if(0==img_origin[1][4])
+            {
+                m=100;
+                1+2;
+
+            }
             img_bucket[point[i][j].x][point[i][j].y]=img_origin[i][j]-'0';
         }
     }
