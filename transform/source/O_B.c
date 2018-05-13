@@ -161,12 +161,12 @@ void show_B()
             //     max[0]=i;
             //     max[1]=j;
             // }
-            if(img_bucket[i][j]==0)
+            if(img_bucket[i][j]!=1)
             {
                 printf(" ");
             }
             else
-                printf("%d",img_bucket[i][j]);
+                printf("1");
         }
         printf("\n");
     }
