@@ -15,7 +15,7 @@ void init_P()
     {
         for(j=0;j<P_col;j++)
         {
-            img_P[i][j]=1;
+            img_P[i][j]=0;
         }
     }
 }
